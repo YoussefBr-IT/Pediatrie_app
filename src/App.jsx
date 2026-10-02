@@ -7,7 +7,7 @@ import Footer from './components/Footer';
 
 function App() {
   return (
-    <div dir="rtl" className="font-sans text-gray-800 bg-slate-50 min-h-screen">
+    <div dir="rtl" className="min-h-screen bg-emerald-50/50 font-sans text-slate-700">
       <Navbar />
       <Hero />
       <AgeSelector />
