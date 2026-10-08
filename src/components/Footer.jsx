@@ -1,35 +1,9 @@
-
-import { MapPin, Phone, Mail } from 'lucide-react';
-
-export default function Footer() {
+export default function Footer({ t }) {
   return (
-    <footer className="bg-teal-950 py-12 text-emerald-50">
-      <div className="max-w-6xl mx-auto px-4 grid md:grid-cols-3 gap-8">
-        <div>
-          <h3 className="mb-4 text-xl font-bold text-white">عيادة د. كريمة قردابو</h3>
-          <p className="mb-4 text-emerald-100/70">
-            رعاية طبية متخصصة للأطفال وحديثي الولادة. تشخيص دقيق ومتابعة مستمرة لضمان نمو صحي وسليم لطفلكم.
-          </p>
-        </div>
-        <div>
-          <h3 className="mb-4 text-xl font-bold text-white">معلومات الاتصال</h3>
-          <ul className="space-y-3 text-emerald-100/70">
-            <li className="flex items-center gap-2"><MapPin className="h-5 w-5 text-rose-300" /> تونس، عنوان العيادة هنا</li>
-            <li className="flex items-center gap-2"><Phone className="h-5 w-5 text-rose-300" /> +216 71 000 000</li>
-            <li className="flex items-center gap-2"><Mail className="h-5 w-5 text-rose-300" /> contact@dr-karima.tn</li>
-          </ul>
-        </div>
-        <div>
-          <h3 className="mb-4 text-xl font-bold text-white">أوقات العمل</h3>
-          <ul className="space-y-2 text-emerald-100/70">
-            <li className="flex justify-between border-b border-teal-800 pb-2"><span>الإثنين - الجمعة</span> <span>09:00 - 17:00</span></li>
-            <li className="flex justify-between border-b border-teal-800 pb-2"><span>السبت</span> <span>09:00 - 13:00</span></li>
-            <li className="flex justify-between pb-2 text-rose-300"><span>الأحد</span> <span>مغلق</span></li>
-          </ul>
-        </div>
-      </div>
-      <div className="mt-8 border-t border-teal-800 pt-8 text-center text-emerald-100/50">
-        © 2026 د. كريمة قردابو. جميع الحقوق محفوظة.
+    <footer className="py-8 bg-white text-slate-600 border-t border-slate-100 text-xs md:text-sm">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4 text-center md:flex md:items-center md:justify-between md:space-y-0">
+        <p className="font-medium">© {new Date().getFullYear()} Dr Karima Brahim Gardabou. {t.footer.rights}</p>
+        <p className="max-w-md text-slate-500 mx-auto md:mx-0">{t.footer.medicalNotice}</p>
       </div>
     </footer>
   );
