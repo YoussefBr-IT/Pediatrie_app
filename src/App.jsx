@@ -5,13 +5,16 @@ import Hero from './components/Hero';
 import Services from './components/Services';
 import About from './components/About';
 import Consult from './components/Consult';
+import Reviews from './components/Reviews';
+import Reels from './components/Reels';
+import ClinicMoments from './components/ClinicMoments';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 
 const content = {
   fr: {
     dir: 'ltr',
-    nav: { home: 'Accueil', services: 'Services', about: 'À Propos', consult: 'Quand Consulter', contact: 'Contact', appointment: 'Rendez-vous' },
+    nav: { home: 'Accueil', services: 'Services', about: 'À Propos', consult: 'Quand Consulter', reels: 'Reels', contact: 'Contact', appointment: 'Rendez-vous' },
     hero: { badge: 'Cabinet Médical Spécialisé', title: 'Votre Santé, Notre Priorité Absolue', subtitle: 'Accompagnement médical personnalisé, diagnostics précis et soins de haute qualité adaptés à vos besoins.', ctaPrimary: 'Prendre Rendez-vous', ctaSecondary: 'Découvrir nos services' },
     services: { 
       title: 'Domaines de soins médicaux', 
@@ -24,7 +27,6 @@ const content = {
     },
     about: { tag: 'Le Praticien', title: 'Dr Karima Brahim Gardabou', specialties: 'Spécialiste en Pédiatrie et Allergologie', bio: 'Diplômée de la Faculté de Médecine avec plus de 15 ans d’expérience praticienne. Passionnée par une approche humaine et holistique de la santé, le Dr Karima s’engage à offrir à chaque patient une écoute attentive et des soins fondés sur les dernières avancées médicales.', stats: [ { number: '15+', label: 'Années d’expérience' }, { number: '8,000+', label: 'Patients suivis' }, { number: '100%', label: 'Dévouement & Soin' } ] },
     consult: { tag: 'Prévention & Conseils', title: 'Quand Devez-vous Consulter ?', subtitle: 'Ne négligez pas les signaux d’alerte de votre corps. Une prise en charge précoce garantit une meilleure récupération.', reasons: [ 'Fatigue persistante ou inexpliquée durant plus de deux semaines', 'Douleurs thoraciques, essoufflement ou palpitations anormales', 'Maux de tête fréquents résistant aux antalgiques habituels', 'Ajustement ou suivi régulier d’un traitement de longue durée', 'Bilan de santé annuel et dépistage préventif' ] },
-    // NOUVELLES COORDONNÉES FRANÇAISES
     contact: { 
       tag: 'Localisation & Accès', 
       title: 'Informations Complètes du Cabinet', 
@@ -42,7 +44,7 @@ const content = {
   },
   ar: {
     dir: 'rtl',
-    nav: { home: 'الرئيسية', services: 'خدماتنا', about: 'عن الطبيب', consult: 'متى تستشير؟', contact: 'الاتصال', appointment: 'حجز موعد' },
+    nav: { home: 'الرئيسية', services: 'خدماتنا', about: 'عن الطبيب', consult: 'متى تستشير؟', reels: 'فيديوهات', contact: 'الاتصال', appointment: 'حجز موعد' },
     hero: { badge: 'عيادة طبية متخصصة', title: 'صحتكم هي أولويتنا المطلقة', subtitle: 'متابعة طبية شخصية، تشخيص دقيق، ورعاية عالية الجودة مصممة لتلبية احتياجاتكم الصحية.', ctaPrimary: 'احجز موعداً الآن', ctaSecondary: 'استكشف خدماتنا' },
     services: { 
       title: 'مجالات الرعاية الطبية', 
@@ -55,7 +57,6 @@ const content = {
     },
     about: { tag: 'الطبيب الممارس', title: 'الدكتورة كريمة ابراهيم القردبو', specialties: 'أخصائية في طب الأطفال والحساسية', bio: 'خريجة كلية الطب مع أكثر من 15 عاماً من الخبرة العملية. تلتزم الدكتورة كريمة بتقديم رعاية صحية إنسانية وشاملة، مع التركيز على الاستماع الفعال للأنشطة الطبية المعتمدة على أحدث التقنيات.', stats: [ { number: '+15', label: 'سنوات من الخبرة' }, { number: '+8000', label: 'مريض تم علاجهم' }, { number: '100%', label: 'التزام ورعاية' } ] },
     consult: { tag: 'وقاية ونصح', title: 'متى ينبغي عليك زيارة الطبيب؟', subtitle: 'لا تتجاهل إشارات جسمك. التشخيص المبكر يضمن استجابة أفضل وعلاجاً أكثر فعالية.', reasons: [ 'شعور مستمر بالتعب أو الإرهاق دون سبب واضح لأكثر من أسبوعين', 'آلام في الصدر، ضيق في التنفس، أو تسارع غير طبيعي في ضربات القلب', 'صداع متكرر ولا يستجيب للمسكنات الاعتيادية', 'متابعة وتعديل جرعات العلاج للأمراض المزمنة', 'إجراء الفحص الطبي السنوي الوقائي' ] },
-    // NOUVELLES COORDONNÉES ARABES
     contact: { 
       tag: 'الموقع والوصول', 
       title: 'معلومات العيادة', 
@@ -75,6 +76,7 @@ const content = {
 
 export default function App() {
   const [lang, setLang] = useState('fr');
+  const [currentPage, setCurrentPage] = useState('home');
   const t = content[lang];
   const isRtl = t.dir === 'rtl';
 
@@ -88,12 +90,22 @@ export default function App() {
 
   return (
     <div className={`min-h-screen bg-slate-50 font-sans text-slate-800 ${isRtl ? 'rtl' : 'ltr'}`}>
-      <Navbar t={t} lang={lang} toggleLanguage={toggleLanguage} />
-      <Hero t={t} lang={lang} />
-      <Services t={t} />
-      <About t={t} lang={lang} />
-      <Consult t={t} />
-      <Contact t={t} lang={lang} />
+      <Navbar t={t} lang={lang} toggleLanguage={toggleLanguage} currentPage={currentPage} setCurrentPage={setCurrentPage} />
+      
+      {currentPage === 'home' ? (
+        <>
+          <Hero t={t} lang={lang} />
+          <Services t={t} />
+          <About t={t} lang={lang} />
+          <Consult t={t} />
+          <ClinicMoments lang={lang} /> {/* <--- Le carrousel des moments heureux */}
+          <Reviews t={t} lang={lang} />
+          <Contact t={t} lang={lang} />
+        </>
+      ) : (
+        <Reels t={t} lang={lang} />
+      )}
+
       <Footer t={t} />
     </div>
   );

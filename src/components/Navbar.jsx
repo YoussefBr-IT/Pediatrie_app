@@ -1,19 +1,24 @@
 import { useState } from 'react';
 import { Menu, X, Globe } from 'lucide-react';
-// Importation de tes deux logos
 import logoFr from '../assets/logo-fr.jpg';
 import logoAr from '../assets/logo-ar.jpg'; 
 
-export default function Navbar({ t, lang, toggleLanguage }) {
+export default function Navbar({ t, lang, toggleLanguage, currentPage, setCurrentPage }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const isAr = lang === 'ar';
 
+  const handleNavClick = (page) => {
+    setCurrentPage(page);
+    setIsMenuOpen(false);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <header dir="ltr" className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-sm">
-      <div className="w-full px-4 md:px-8 lg:px-12 h-24 flex items-center justify-between">
+      <div className="relative w-full px-4 md:px-8 lg:px-12 h-24 flex items-center justify-between">
         
-        {/* LOGO DYNAMIQUE */}
-        <div className="flex items-center">
+        {/* LOGO (Z-10 pour rester cliquable au-dessus du centre) */}
+        <div className="flex items-center cursor-pointer relative z-10" onClick={() => handleNavClick('home')}>
           <img 
             src={isAr ? logoAr : logoFr} 
             alt="Logo Dr Karima Brahim Gardabou" 
@@ -21,28 +26,26 @@ export default function Navbar({ t, lang, toggleLanguage }) {
           />
         </div>
         
-        {/* Liens de navigation (Agrandis : text-base md:text-lg et espacement accru) */}
-        <nav className={`hidden md:flex items-center gap-10 font-semibold text-base md:text-lg text-slate-700 ${isAr ? 'flex-row-reverse' : ''}`}>
-          <a href="#home" className="hover:text-[#f15a24] transition-colors">{t.nav.home}</a>
-          <a href="#services" className="hover:text-[#f15a24] transition-colors">{t.nav.services}</a>
-          <a href="#about" className="hover:text-[#f15a24] transition-colors">{t.nav.about}</a>
-          <a href="#consult" className="hover:text-[#f15a24] transition-colors">{t.nav.consult}</a>
-          <a href="#contact" className="hover:text-[#f15a24] transition-colors">{t.nav.contact}</a>
+        {/* Liens de navigation (Parfaitement au centre absolu) */}
+        <nav className={`hidden lg:flex absolute left-1/2 -translate-x-1/2 items-center gap-6 xl:gap-10 font-semibold text-base text-slate-700 ${isAr ? 'flex-row-reverse' : ''} z-0`}>
+          <button onClick={() => handleNavClick('home')} className={`hover:text-[#f15a24] transition-colors whitespace-nowrap ${currentPage === 'home' ? 'text-[#f15a24]' : ''}`}>{t.nav.home}</button>
+          <button onClick={() => { setCurrentPage('home'); setTimeout(() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' }), 100); }} className="hover:text-[#f15a24] transition-colors whitespace-nowrap">{t.nav.services}</button>
+          <button onClick={() => { setCurrentPage('home'); setTimeout(() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' }), 100); }} className="hover:text-[#f15a24] transition-colors whitespace-nowrap">{t.nav.about}</button>
+          <button onClick={() => { setCurrentPage('home'); setTimeout(() => document.getElementById('consult')?.scrollIntoView({ behavior: 'smooth' }), 100); }} className="hover:text-[#f15a24] transition-colors whitespace-nowrap">{t.nav.consult}</button>
+          <button onClick={() => handleNavClick('reels')} className={`hover:text-[#f15a24] transition-colors whitespace-nowrap ${currentPage === 'reels' ? 'text-[#f15a24]' : ''}`}>{isAr ? 'فيديوهات' : 'Reels'}</button>
+          <button onClick={() => { setCurrentPage('home'); setTimeout(() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }), 100); }} className="hover:text-[#f15a24] transition-colors whitespace-nowrap">{t.nav.contact}</button>
         </nav>
         
-        {/* Boutons Desktop (Agrandis : texte et padding augmentés) */}
-        <div className="hidden md:flex items-center gap-4">
+        {/* Boutons Desktop (Sélecteur de langue) */}
+        <div className="hidden lg:flex items-center gap-4 relative z-10">
           <button onClick={toggleLanguage} className={`flex items-center gap-2.5 px-4 py-2.5 rounded-xl border border-slate-200 text-sm md:text-base font-bold text-slate-700 hover:bg-slate-50 transition ${isAr ? 'flex-row-reverse' : ''}`}>
             <Globe className="w-5 h-5 text-[#f15a24]" />
             <span>{isAr ? 'Français' : 'العربية'}</span>
           </button>
-          <a href="#contact" className="px-6 py-3 rounded-xl bg-[#f15a24] hover:bg-[#d84a1b] text-white font-bold text-sm md:text-base shadow-md shadow-orange-500/20 transition duration-200">
-            {t.nav.appointment}
-          </a>
         </div>
         
         {/* Boutons Mobile */}
-        <div className="flex items-center gap-2 md:hidden">
+        <div className="flex items-center gap-2 lg:hidden relative z-10">
           <button onClick={toggleLanguage} className="p-2.5 rounded-lg border border-slate-200 text-slate-700 hover:bg-slate-50">
             <Globe className="w-6 h-6 text-[#f15a24]" />
           </button>
@@ -54,13 +57,9 @@ export default function Navbar({ t, lang, toggleLanguage }) {
       
       {/* Menu Mobile Déroulant */}
       {isMenuOpen && (
-        <div dir={isAr ? 'rtl' : 'ltr'} className="md:hidden border-b border-slate-100 bg-white px-6 pt-4 pb-8 space-y-4 shadow-lg">
-          <a href="#home" onClick={() => setIsMenuOpen(false)} className="block px-3 py-2 rounded-md font-bold text-lg text-slate-700 hover:bg-amber-50 hover:text-[#f15a24]">{t.nav.home}</a>
-          <a href="#services" onClick={() => setIsMenuOpen(false)} className="block px-3 py-2 rounded-md font-bold text-lg text-slate-700 hover:bg-amber-50 hover:text-[#f15a24]">{t.nav.services}</a>
-          <a href="#about" onClick={() => setIsMenuOpen(false)} className="block px-3 py-2 rounded-md font-bold text-lg text-slate-700 hover:bg-amber-50 hover:text-[#f15a24]">{t.nav.about}</a>
-          <a href="#consult" onClick={() => setIsMenuOpen(false)} className="block px-3 py-2 rounded-md font-bold text-lg text-slate-700 hover:bg-amber-50 hover:text-[#f15a24]">{t.nav.consult}</a>
-          <a href="#contact" onClick={() => setIsMenuOpen(false)} className="block px-3 py-2 rounded-md font-bold text-lg text-slate-700 hover:bg-amber-50 hover:text-[#f15a24]">{t.nav.contact}</a>
-          <a href="#contact" onClick={() => setIsMenuOpen(false)} className="block w-full text-center mt-4 px-4 py-3 rounded-xl bg-[#f15a24] text-white font-bold text-base shadow-md">{t.nav.appointment}</a>
+        <div dir={isAr ? 'rtl' : 'ltr'} className="lg:hidden border-b border-slate-100 bg-white px-6 pt-4 pb-8 space-y-4 shadow-lg">
+          <button onClick={() => handleNavClick('home')} className="block w-full text-left px-3 py-2 rounded-md font-bold text-lg text-slate-700 hover:bg-amber-50 hover:text-[#f15a24]">{t.nav.home}</button>
+          <button onClick={() => handleNavClick('reels')} className="block w-full text-left px-3 py-2 rounded-md font-bold text-lg text-slate-700 hover:bg-amber-50 hover:text-[#f15a24]">{isAr ? 'فيديوهات' : 'Reels'}</button>
         </div>
       )}
     </header>

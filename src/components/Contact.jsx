@@ -65,9 +65,13 @@ export default function Contact({ t, lang }) {
               {isAr ? 'اتصل بسكرتاريتنا الطبية لحجز موعدك.' : 'Contactez notre secrétariat médical pour réserver votre créneau.'}
             </p>
           </div>
-          <button className="bg-white text-[#f15a24] hover:bg-slate-50 px-8 py-3.5 rounded-xl font-bold whitespace-nowrap transition shadow-md">
+          {/* Remplacement du <button> par <a> pour le lien téléphonique */}
+          <a 
+            href="tel:+21697806230" 
+            className="bg-white text-[#f15a24] hover:bg-slate-50 px-8 py-3.5 rounded-xl font-bold whitespace-nowrap transition shadow-md"
+          >
             {isAr ? 'اتصل بالعيادة' : 'Appeler la clinique'}
-          </button>
+          </a>
         </div>
 
       </div>
