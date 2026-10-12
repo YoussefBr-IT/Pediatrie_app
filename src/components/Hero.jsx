@@ -31,7 +31,7 @@ export default function Hero({ lang }) {
         flex justify-center gap-2 px-2 
         md:grid md:grid-cols-3 md:gap-4 md:px-6 lg:px-10 place-items-center"
       >
-        {/* Bouton WhatsApp (Vert) - S'aligne sous le 1er texte */}
+        {/* Bouton WhatsApp (Vert) */}
         <a 
           href="https://wa.me/21697806230" 
           target="_blank" 
@@ -42,9 +42,9 @@ export default function Hero({ lang }) {
           <span dir={isAr ? 'rtl' : 'ltr'}>{isAr ? 'واتساب' : 'WhatsApp'}</span>
         </a>
 
-        {/* Bouton Facebook (Bleu) - S'aligne sous le 2ème texte */}
+        {/* Bouton Facebook (Bleu) */}
         <a 
-          href="https://www.facebook.com" 
+          href="https://www.facebook.com/Allergol" 
           target="_blank" 
           rel="noopener noreferrer"
           className="bg-[#1877F2] hover:bg-[#166fe5] text-white w-full max-w-[110px] sm:max-w-[140px] md:max-w-[170px] py-2 sm:py-3 md:py-3.5 rounded-full flex items-center justify-center gap-1.5 sm:gap-2 font-bold text-[10px] sm:text-sm md:text-base transition shadow-lg shadow-blue-500/30 hover:-translate-y-1"
@@ -55,9 +55,9 @@ export default function Hero({ lang }) {
           <span dir={isAr ? 'rtl' : 'ltr'}>{isAr ? 'فيسبوك' : 'Facebook'}</span>
         </a>
 
-        {/* Bouton Instagram (Orange) - S'aligne sous le 3ème texte */}
+        {/* Bouton Instagram (Orange) avec le lien officiel du Dr Karima */}
         <a 
-          href="https://www.instagram.com" 
+          href="https://www.instagram.com/dr_karima_brahim_gardabou/?utm_source=ig_embed&ig_rid=AKJo3y2UYfEUrVKZQn3LXfU" 
           target="_blank" 
           rel="noopener noreferrer"
           className="bg-[#f15a24] hover:bg-[#d84a1b] text-white w-full max-w-[110px] sm:max-w-[140px] md:max-w-[170px] py-2 sm:py-3 md:py-3.5 rounded-full flex items-center justify-center gap-1.5 sm:gap-2 font-bold text-[10px] sm:text-sm md:text-base transition shadow-lg shadow-orange-500/30 hover:-translate-y-1"
