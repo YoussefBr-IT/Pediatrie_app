@@ -10,6 +10,7 @@ import Reels from './components/Reels';
 import ClinicMoments from './components/ClinicMoments';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import AIChatbot from './components/AIChatbot'; // <-- 1. Import de ton nouveau chatbot
 
 const content = {
   fr: {
@@ -89,7 +90,7 @@ export default function App() {
   };
 
   return (
-    <div className={`min-h-screen bg-slate-50 font-sans text-slate-800 ${isRtl ? 'rtl' : 'ltr'}`}>
+    <div className={`min-h-screen bg-slate-50 font-sans text-slate-800 ${isRtl ? 'rtl' : 'ltr'} relative`}>
       <Navbar t={t} lang={lang} toggleLanguage={toggleLanguage} currentPage={currentPage} setCurrentPage={setCurrentPage} />
       
       {currentPage === 'home' ? (
@@ -98,7 +99,7 @@ export default function App() {
           <Services t={t} />
           <About t={t} lang={lang} />
           <Consult t={t} />
-          <ClinicMoments lang={lang} /> {/* <--- Le carrousel des moments heureux */}
+          <ClinicMoments lang={lang} /> 
           <Reviews t={t} lang={lang} />
           <Contact t={t} lang={lang} />
         </>
@@ -107,6 +108,9 @@ export default function App() {
       )}
 
       <Footer t={t} />
+      
+      {/* 2. Ajout du chatbot ici, il recevra la langue courante pour s'adapter (Français ou Arabe) */}
+      <AIChatbot lang={lang} />
     </div>
   );
 }

@@ -33,10 +33,15 @@ export default function Services({ t }) {
                   {service.desc}
                 </p>
                 
-                {/* Bouton "En savoir plus" / "اعرف المزيد" */}
-                <button className="bg-[#00897b] hover:bg-[#007065] text-white px-8 py-2.5 rounded-full font-bold text-sm transition-colors w-auto">
+                {/* Lien Instagram "En savoir plus" / "اعرف المزيد" */}
+                <a 
+                  href="https://www.instagram.com/dr_karima_brahim_gardabou/?utm_source=ig_embed&ig_rid=AKJo3y2UYfEUrVKZQn3LXfU"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-[#00897b] hover:bg-[#007065] text-white px-8 py-2.5 rounded-full font-bold text-sm transition-colors inline-block text-center"
+                >
                   {service.cta}
-                </button>
+                </a>
               </div>
             );
           })}
